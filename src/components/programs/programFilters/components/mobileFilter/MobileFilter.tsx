@@ -16,7 +16,7 @@ export default function MobileFilters({ schools }: Props) {
     <>
       {/* Floating Filter Button */}
       <button
-        className="lg:hidden fixed bottom-4 right-4 z-40 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg"
+        className="lg:hidden fixed bottom-2 right-4 z-40 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg"
         onClick={() => setOpen(true)}
       >
         Filters
@@ -25,16 +25,19 @@ export default function MobileFilters({ schools }: Props) {
       {/* Overlay */}
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50">
-          <div className="absolute top-0 w-full bg-white p-4 h-full overflow-y-auto">
-            {/* Filters now use Context internally */}
-            <SchoolFilter schools={schools} />
+          {/* Container */}
+          <div className="absolute inset-0 bg-white flex flex-col">
+            {/* Scrollable Filters */}
+            <div className="flex-1 overflow-y-auto p-4">
+              <SchoolFilter schools={schools} />
 
-            <div className="mt-6">
-              <DepartmentFilter schools={schools} />
+              <div className="mt-6">
+                <DepartmentFilter schools={schools} />
+              </div>
             </div>
 
-            {/* Actions */}
-            <div className="flex gap-3 mt-6">
+            {/* Sticky Actions */}
+            <div className="sticky bottom-0 bg-white border-t p-4 flex gap-3">
               <button
                 className="flex-1 border rounded-md py-2"
                 onClick={() => setOpen(false)}
