@@ -16,7 +16,7 @@ export default function MobileFilters({ schools }: Props) {
     <>
       {/* Floating Filter Button */}
       <button
-        className="lg:hidden fixed bottom-2 right-4 z-40 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg"
+        className="lg:hidden fixed bottom-5 right-4 z-40 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg"
         onClick={() => setOpen(true)}
       >
         Filters
