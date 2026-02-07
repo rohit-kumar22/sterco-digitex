@@ -16,7 +16,7 @@ export default function Header() {
   const { isMenuOpen, toggleMenu, closeMenu } = useHeader();
 
   return (
-    <header className=" sticky top-0 z-50 w-full bg-[#EAF4FB]">
+    <header className="sticky top-0 z-50 w-full bg-[#EAF4FB]">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -46,48 +46,14 @@ export default function Header() {
             >
               Admissions
             </Link>
-            {/* Mobile Menu Button */}
+
+            {/* Hamburger / Close Button */}
             <button
               onClick={toggleMenu}
-              className="lg:hidden relative z-50 flex items-center justify-center w-10 h-10"
+              className="lg:hidden flex items-center justify-center w-10 h-10 text-3xl font-bold"
               aria-label="Toggle menu"
             >
-              {isMenuOpen && (
-                <div className="lg:hidden fixed inset-0 top-20 bg-white z-40 flex flex-col">
-                  {/* Close button */}
-                  <div className="flex justify-end px-4 py-3 border-b">
-                    <button
-                      onClick={closeMenu}
-                      className="text-2xl font-bold"
-                      aria-label="Close menu"
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  {/* Scrollable nav */}
-                  <nav className="flex-1 overflow-y-auto flex flex-col divide-y">
-                    {NAV_ITEMS.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={closeMenu}
-                        className="px-6 py-4 text-sm font-medium uppercase text-[#1F2A44] hover:bg-gray-100"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-
-                    <Link
-                      href="#"
-                      onClick={closeMenu}
-                      className="px-6 py-4 text-sm font-semibold bg-[#FFC107]"
-                    >
-                      Admissions
-                    </Link>
-                  </nav>
-                </div>
-              )}
+              {isMenuOpen ? "×" : "☰"}
             </button>
           </div>
         </div>
@@ -107,6 +73,7 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+
             <Link
               href="#"
               onClick={closeMenu}

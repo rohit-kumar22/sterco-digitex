@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Program } from "@/src/types/programs";
 import { useProgram } from "@/src/context/ProgramContext";
 
-export function useProgramsClient(slug: string) {
+export function useProgramsClient() {
   const { state } = useProgram();
 
   const [programs, setPrograms] = useState<Program[]>([]);
@@ -15,26 +15,32 @@ export function useProgramsClient(slug: string) {
     const params = new URLSearchParams();
 
     if (state.search) params.append("search", state.search);
-    if (state.schools.length) params.append("schools", state.schools.join(","));
+    if (state.schools.length)
+      params.append("school_id", state.schools.join(","));
     if (state.departments.length)
-      params.append("departments", state.departments.join(","));
+      params.append("department_id", state.departments.join(","));
 
     params.append("page", String(state.page));
 
-    fetch(`https://project-demo.in/jss/api/programs/${slug}?${params}`)
+    fetch(
+      `https://project-demo.in/jss/api/programs/${state.categorySlug}?${params}`
+    )
       .then((res) => res.json())
       .then((json) => {
-        const newPrograms = json.data.data;
-        const pages = json.data.last_page;
-
-        setTotalPages(pages);
+        setTotalPages(json.data.last_page);
 
         setPrograms((prev) =>
-          state.page === 1 ? newPrograms : [...prev, ...newPrograms]
+          state.page === 1 ? json.data.data : [...prev, ...json.data.data]
         );
       })
       .finally(() => setLoading(false));
-  }, [slug, state.search, state.schools, state.departments, state.page]);
+  }, [
+    state.categorySlug,
+    state.search,
+    state.schools,
+    state.departments,
+    state.page,
+  ]);
 
   return { programs, loading, totalPages };
 }

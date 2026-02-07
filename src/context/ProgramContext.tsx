@@ -2,24 +2,38 @@
 
 import { createContext, useContext, useReducer } from "react";
 
+/* ---------- TYPES ---------- */
+
 type State = {
   search: string;
   schools: number[];
   departments: number[];
   page: number;
+  categorySlug: string;
 };
 
 type Action =
   | { type: "SET_SEARCH"; payload: string }
   | { type: "SET_SCHOOLS"; payload: number[] }
   | { type: "SET_DEPARTMENTS"; payload: number[] }
-  | { type: "SET_PAGE"; payload: number };
+  | { type: "SET_PAGE"; payload: number }
+  | { type: "SET_CATEGORY"; payload: string };
+
+type ProgramContextType = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};
+
+export const ProgramContext = createContext<ProgramContextType | null>(null);
+
+/* ---------- REDUCER ---------- */
 
 const initialState: State = {
   search: "",
   schools: [],
   departments: [],
   page: 1,
+  categorySlug: "under-graduate",
 };
 
 function reducer(state: State, action: Action): State {
@@ -36,12 +50,19 @@ function reducer(state: State, action: Action): State {
     case "SET_PAGE":
       return { ...state, page: action.payload };
 
+    case "SET_CATEGORY":
+      return {
+        ...state,
+        categorySlug: action.payload,
+        page: 1,
+      };
+
     default:
       return state;
   }
 }
 
-const ProgramContext = createContext<any>(null);
+/* ---------- PROVIDER ---------- */
 
 export function ProgramProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -53,6 +74,14 @@ export function ProgramProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ---------- HOOK ---------- */
+
 export function useProgram() {
-  return useContext(ProgramContext);
+  const context = useContext(ProgramContext);
+
+  if (!context) {
+    throw new Error("useProgram must be used inside ProgramProvider");
+  }
+
+  return context;
 }

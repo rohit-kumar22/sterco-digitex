@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProgramCategory } from "@/src/types/programs";
 
 export function useProgramTabs(categories: ProgramCategory[]) {
-  const [activeTab, setActiveTab] = useState<ProgramCategory | null>(
-    categories.length ? categories[0] : null
-  );
+  const [activeTab, setActiveTab] = useState<ProgramCategory | null>(null);
 
-  return {
-    activeTab,
-    setActiveTab,
-  };
+  useEffect(() => {
+    if (categories.length && !activeTab) {
+      setActiveTab(categories[0]);
+    }
+  }, [categories, activeTab]);
+
+  return { activeTab, setActiveTab };
 }

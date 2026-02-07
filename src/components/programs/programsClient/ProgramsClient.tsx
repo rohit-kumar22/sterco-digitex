@@ -10,11 +10,10 @@ import { useLoadMore } from "./components/loadMore/useLoadMore";
 
 interface Props {
   schools: School[];
-  slug: string;
 }
 
-export default function ProgramsClient({ schools, slug }: Props) {
-  const { programs, loading, totalPages } = useProgramsClient(slug);
+export default function ProgramsClient({ schools }: Props) {
+  const { programs, loading, totalPages } = useProgramsClient();
   const { visible, handleLoadMore } = useLoadMore(totalPages);
 
   return (

@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <ProgramProvider>
       <ProgramsHero />
-      <ProgramsClient slug="under-graduate" schools={schools} />
+      <ProgramsClient schools={schools} />
     </ProgramProvider>
   );
 }
