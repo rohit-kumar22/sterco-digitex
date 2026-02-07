@@ -17,7 +17,7 @@ export default function ProgramsClient({ schools }: Props) {
   const { visible, handleLoadMore } = useLoadMore(totalPages);
 
   return (
-    <section className="container mx-auto px-20 bg-[#f3f3f3] pt-4 pb-5">
+    <section className=" lg:px-20 px-10 bg-[#f3f3f3] pt-4 pb-5">
       <div className="flex gap-8 mt-8">
         <ProgramFilters schools={schools} />
 

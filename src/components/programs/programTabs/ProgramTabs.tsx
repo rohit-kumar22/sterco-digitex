@@ -14,7 +14,7 @@ export default function ProgramTabs({ categories }: Props) {
     <div className="relative w-full pt-px">
       <div className="absolute top-0 inset-x-80 h-px bg-gray-300" />
 
-      <div className="flex justify-center gap-12">
+      <div className="flex justify-center gap-12 pb-5">
         {categories.map((category) => {
           const isActive = state.categorySlug === category.slug;
 

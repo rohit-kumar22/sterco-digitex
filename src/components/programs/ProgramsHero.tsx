@@ -6,7 +6,7 @@ export default async function ProgramsHero() {
   const categories = await getProgramCategories();
 
   return (
-    <section className="bg-[#EAF4FB] pt-5 pb-20 text-center relative pb-5">
+    <section className="bg-[#EAF4FB] pt-20 text-center relative pb-5">
       <p className="text-xs tracking-widest text-gray-500 font-semibold">
         PROGRAMS
       </p>

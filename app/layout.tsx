@@ -11,9 +11,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="h-screen overflow-hidden">
         <Header />
-        <main className="h-[calc(100vh-80px)] overflow-y-auto">
+        <main className="h-[calc(100vh-100px)] overflow-y-auto">
           {children}
-        </main>{" "}
+        </main>
         <Footer />
       </body>
     </html>

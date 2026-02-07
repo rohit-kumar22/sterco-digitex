@@ -25,7 +25,7 @@ export default function MobileFilters({ schools }: Props) {
       {/* Overlay */}
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50">
-          <div className="absolute bottom-0 w-full bg-white rounded-t-xl p-4 max-h-[85vh] overflow-y-auto">
+          <div className="absolute top-0 w-full bg-white p-4 h-full overflow-y-auto">
             {/* Filters now use Context internally */}
             <SchoolFilter schools={schools} />
 
